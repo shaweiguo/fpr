@@ -189,3 +189,6 @@ cython_debug/
 
 **/**/*.lock
 **/.DS_Store
+**/android/app/debug
+**/android/app/profile
+**/android/app/release

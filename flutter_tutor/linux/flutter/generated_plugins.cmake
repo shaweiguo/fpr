@@ -3,6 +3,20 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  clipboard_watcher
+  contextual_menu
+  desktop_drop
+  desktop_webview_window
+  file_selector_linux
+  hotkey_manager
+  local_notifier
+  pasteboard
+  screen_retriever
+  screen_text_extractor
+  system_tray
+  tray_manager
+  url_launcher_linux
+  window_manager
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
