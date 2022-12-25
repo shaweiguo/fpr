@@ -1,0 +1,2 @@
+pyzmq==24.0.1
+websockets==10.4
