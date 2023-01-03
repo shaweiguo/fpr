@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"hash/crc32"
+	waitgroup "hyjj/pkg"
 	"log"
 	"os"
 	"os/exec"
@@ -90,16 +91,33 @@ func getDrivers() (drivers []string) {
 	return
 }
 
+//func main() {
+//	//start := time.Now()
+//	//result := getHash("D:\\software\\.x\\2207\\5892dffa-916e-4c07-8292-b8a122d8d374")
+//	//strs := strings.Split(result, ",")
+//	//h, err := strs[0], strs[1]
+//	//if err != "" {
+//	//	fmt.Println(err)
+//	//}
+//	//fmt.Println("HASH: ", h)
+//	//fmt.Println("Time elapsed: ", time.Since(start).Milliseconds())
+//	drivers := getDrivers()
+//	fmt.Println(drivers)
+//}
+
+//智慧门诊2+审方3+医共体6+
+//go mod init github.com/PacktPublishing/Go-Programming-Cookbook-Second-Edition/chapter10/channels
+
 func main() {
-	//start := time.Now()
-	//result := getHash("D:\\software\\.x\\2207\\5892dffa-916e-4c07-8292-b8a122d8d374")
-	//strs := strings.Split(result, ",")
-	//h, err := strs[0], strs[1]
-	//if err != "" {
-	//	fmt.Println(err)
-	//}
-	//fmt.Println("HASH: ", h)
-	//fmt.Println("Time elapsed: ", time.Since(start).Milliseconds())
-	drivers := getDrivers()
-	fmt.Println(drivers)
+	sites := []string{
+		"https://bing.com/",
+		"https://godoc.org",
+		"https://github.com/",
+	}
+
+	resps, err := waitgroup.Crawl(sites)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("Resps received:", resps)
 }
