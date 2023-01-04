@@ -1,4 +1,4 @@
-package waitgroup
+package crawl
 
 import (
 	"fmt"
