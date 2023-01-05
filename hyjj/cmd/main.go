@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"hyjj/pkg/algorithm"
 	crawl "hyjj/pkg/crawl"
 	"hyjj/pkg/fs"
 	"os"
@@ -56,5 +57,6 @@ func ex_get_file_hashs() {
 
 func main() {
 	//get_files("D:\\sync\\temp")
-	ex_get_file_hashs()
+	//ex_get_file_hashs()
+	algorithm.Ex()
 }
