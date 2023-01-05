@@ -23,13 +23,6 @@ func ex_crawl() {
 	fmt.Println("Resps received:", resps)
 }
 
-//func ex_fileHash() {
-//	drivers := fs.GetDrivers()
-//	for _, d := range drivers {
-//
-//	}
-//}
-
 func get_files(dir string) {
 	files, err := os.ReadDir(dir)
 	if err != nil {
@@ -48,6 +41,20 @@ func get_files(dir string) {
 	fmt.Println(hashs)
 }
 
+func ex_get_file_hashs() {
+	filename := "D:\\sync\\temp\\Organization - 副本.txt"
+	//hashes := fs.GetFileHashs0(filename)
+	sha256 := fs.GetFileSha256Hash(filename)
+	if sha256 == nil {
+		fmt.Println("error")
+		return
+	}
+	//for _, h := range hashes {
+	fmt.Printf("%x\n", sha256)
+	//}
+}
+
 func main() {
-	get_files("D:\\sync\\temp")
+	//get_files("D:\\sync\\temp")
+	ex_get_file_hashs()
 }

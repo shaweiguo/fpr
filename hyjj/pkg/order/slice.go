@@ -48,3 +48,13 @@ func GenricMap[T1, T2 any](input []T1, f func(T1) T2) []T2 {
 	}
 	return result
 }
+
+func GenericFilter[T any](input []T, f func(T) bool) []T {
+	var result []T
+	for _, val := range input {
+		if f(val) {
+			result = append(result, val)
+		}
+	}
+	return result
+}
