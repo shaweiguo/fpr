@@ -1,0 +1,16 @@
+syntax = "proto3";
+package proto;
+option go_package = "./;proto";
+
+message GetReq {
+  string author = 1;
+}
+
+message GetResp {
+  string author = 1;
+  string quote = 2;
+}
+
+service QOTD {
+  rpc GetQOTD(GetReq) returns (GetResp) {};
+}
