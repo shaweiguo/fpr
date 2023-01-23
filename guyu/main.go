@@ -5,11 +5,13 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"go.uber.org/zap"
 	"guyu/cmd"
 	"log"
 	"os"
 	"os/signal"
+	"sync"
 	"syscall"
 )
 
@@ -56,6 +58,7 @@ const PETSOTRE_BOT_APP_TOKEN = "xapp-1-A04HYC52C59-4595987458807-acf4702412f0048
 const SLACK_AUTH_TOKEN = "xoxb-4610391462931-4634227803968-Vlydb3gZxpWmIWjQKcCrZL0o"
 
 func main() {
+	var wg sync.WaitGroup
 	ctx, cancel := context.WithCancel(context.Background())
 	logger, _ := zap.NewProduction()
 	defer logger.Sync() // flushes buffer, if any
@@ -67,14 +70,22 @@ func main() {
 		zap.Int("pid", os.Getpid()))
 
 	var sigCh chan os.Signal
-	go func() {
-		handleSignal(ctx, cancel)
-	}()
+	//go func() {
+	sigCh = handleSignal(ctx, cancel)
+	//}()
 
 	cmd.Execute(ctx)
-	cancel()
+	//cancel()
 
-	if sig := <-sigCh; sig == syscall.SIGQUIT {
-		panic("SIGQUIT")
-	}
+	//if sig := <-sigCh; sig == syscall.SIGQUIT || sig == syscall.SIGTERM {
+	//	fmt.Println("cancelled")
+	//}
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		<-sigCh
+		fmt.Println("cancelled")
+		os.Exit(0)
+	}()
+	wg.Wait()
 }
